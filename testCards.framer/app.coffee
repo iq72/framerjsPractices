@@ -48,7 +48,7 @@ tips = new Layer
 cards = []
 margin = dpr 18
 height = dpr 320
-threhold = dpr 100
+threhold = dpr 80
 amount = 5
 
 for i in [0...amount]
@@ -78,7 +78,7 @@ for i in [0...amount]
 			name:"appendix"
 			superLayer: scroll.content
 			width: Screen.width
-			height: dpr 80
+			height: dpr 20
 			x:Align.center
 			y: (i+1)*(height+margin)+ 2*margin
 			backgroundColor: "transparent"
@@ -117,33 +117,42 @@ cover.onTap ->
 ###
 # pull up to fold the list
 ###
-mark1 = parseInt scroll.content.childrenWithName("appendix")[0].maxY
-mark2 = parseInt scroll.content.childrenWithName("appendix")[0].minY
+mark1 = parseInt scroll.content.childrenWithName("appendix")[0].maxY - scroll.height + tips.height + threhold
+mark2 = parseInt scroll.content.childrenWithName("appendix")[0].minY - scroll.height + threhold
+
 
 scroll.on Events.Scroll , ->
-# 	print mark1
-	if mark2 < Screen.height < mark1
-		print "hit mark1"
-		tips.y = Screen.height  - ( mark1 - Screen.height)
+	scrlY=scroll.scrollY
+	if mark2 < scrlY < mark1
+		console.log "hit mark2"
+		tips.y = Utils.modulate(scrlY, [mark1, mark2], [ Screen.height-tips.height, Screen.height])
 		tips.html = """
 			<span>Pull up to fold the cards</span>
 		"""
-	else if Screen.height <= mark2
+	else if scrlY >= mark1
+		console.log "hit mark1"
 		tips.y = Screen.height - tips.height
 		tips.html = """
 			<span>Release to fold</span>
 		"""
+	else 
+		tips.y = Screen.height
+		tips.html = """
+			<span>Pull up to fold the cards</span>
+		"""
 
 scroll.on Events.ScrollEnd, ->
-	if mark2?
-		print mark2
-	if Screen.height > mark2
+	console.log "mark2 is #{mark2} \n scrollY is #{scroll.scrollY}"
+	scrlY=scroll.scrollY
+	if scrlY < mark1
 		animationSlideDown = new Animation
 			layer: tips
 			properties: 
 				y : Screen.height
+			curve: "spring(300,40,0)"
 		animationSlideDown.start()
-	else if Screen.height <= mark2
+	else if scrlY >= mark1
+		console.log "folded"
 		tips.y = Screen.height
 		cover.states.next()
 		scroll.states.next()
