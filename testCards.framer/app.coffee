@@ -1,4 +1,5 @@
 {dpr} = require 'DevicePixelRatio'
+
 console.log dpr 1
 ###########
 #background
@@ -117,20 +118,21 @@ cover.onTap ->
 ###
 # pull up to fold the list
 ###
-mark1 = parseInt scroll.content.childrenWithName("appendix")[0].maxY - scroll.height + tips.height + threhold
-mark2 = parseInt scroll.content.childrenWithName("appendix")[0].minY - scroll.height + threhold
+mark1 = scroll.content.childrenWithName("appendix")[0].maxY - scroll.height + tips.height + threhold
+mark2 = scroll.content.childrenWithName("appendix")[0].minY - scroll.height + threhold
 
+maxY = scroll.content.childrenWithName("appendix")[0].maxY
+
+console.log "initial maxY is #{maxY}"
 
 scroll.on Events.Scroll , ->
 	scrlY=scroll.scrollY
 	if mark2 < scrlY < mark1
-		console.log "hit mark2"
 		tips.y = Utils.modulate(scrlY, [mark1, mark2], [ Screen.height-tips.height, Screen.height])
 		tips.html = """
 			<span>Pull up to fold the cards</span>
 		"""
 	else if scrlY >= mark1
-		console.log "hit mark1"
 		tips.y = Screen.height - tips.height
 		tips.html = """
 			<span>Release to fold</span>
@@ -142,7 +144,6 @@ scroll.on Events.Scroll , ->
 		"""
 
 scroll.on Events.ScrollEnd, ->
-	console.log "mark2 is #{mark2} \n scrollY is #{scroll.scrollY}"
 	scrlY=scroll.scrollY
 	if scrlY < mark1
 		animationSlideDown = new Animation
@@ -164,8 +165,8 @@ scroll.on Events.ScrollEnd, ->
 ###########
 # ini
 ##########
-# cover.states.next()
-# scroll.states.next()
-# for card in cards 
-# 	card.states.next()
+cover.states.switchInstant("folded")
+scroll.states.switchInstant("folded")
+for card in cards 
+	card.states.switchInstant("folded")
 
