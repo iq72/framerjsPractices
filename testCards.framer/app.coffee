@@ -29,6 +29,7 @@ scroll = new ScrollComponent
 ###########
 
 tips = new Layer
+	clip: true
 	width: Screen.width
 	height: dpr 80
 	y: Screen.height
@@ -54,6 +55,7 @@ amount = 5
 
 for i in [0...amount]
 	card = new Layer
+		clip:true
 		name: "card#{i}"
 		superLayer: scroll.content
 		width: Screen.width - (margin*2)
@@ -76,6 +78,7 @@ for i in [0...amount]
 	cards.push card
 	if i==amount-1
 		appendCard= new Layer
+			clip: true
 			name:"appendix"
 			superLayer: scroll.content
 			width: Screen.width
@@ -86,6 +89,7 @@ for i in [0...amount]
 
 #cover
 cover = new Layer
+	clip: true
 	width: Screen.width
 	height: dpr 80
 	backgroundColor: themeColor
@@ -120,10 +124,6 @@ cover.onTap ->
 ###
 mark1 = scroll.content.childrenWithName("appendix")[0].maxY - scroll.height + tips.height + threhold
 mark2 = scroll.content.childrenWithName("appendix")[0].minY - scroll.height + threhold
-
-maxY = scroll.content.childrenWithName("appendix")[0].maxY
-
-console.log "initial maxY is #{maxY}"
 
 scroll.on Events.Scroll , ->
 	scrlY=scroll.scrollY
