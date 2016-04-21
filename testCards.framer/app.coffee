@@ -4,7 +4,7 @@ console.log dpr 1
 ###########
 #background
 ###########
-bg = new BackgroundLayer 
+bg = new BackgroundLayer
 	backgroundColor: "#eee"
 
 themeColor = new Color("rgba(15,157,255,1)")
@@ -34,7 +34,7 @@ tips = new Layer
 	y: Screen.height
 	color: "#aaa"
 	style:
-		font: "400 #{dpr 24}px -apple-system, Helvetica Neue, sans"
+		font: "400 #{dpr 24}px -apple-system, Helvetica Neue, sans-serif"
 		textAlign: "center"
 	html: """
 		<span>Pull up to fold the cards</span>
@@ -137,7 +137,7 @@ scroll.on Events.Scroll , ->
 		tips.html = """
 			<span>Release to fold</span>
 		"""
-	else 
+	else
 		tips.y = Screen.height
 		tips.html = """
 			<span>Pull up to fold the cards</span>
@@ -148,7 +148,7 @@ scroll.on Events.ScrollEnd, ->
 	if scrlY < mark1
 		animationSlideDown = new Animation
 			layer: tips
-			properties: 
+			properties:
 				y : Screen.height
 			curve: "spring(300,40,0)"
 		animationSlideDown.start()
@@ -167,6 +167,5 @@ scroll.on Events.ScrollEnd, ->
 ##########
 cover.states.switchInstant("folded")
 scroll.states.switchInstant("folded")
-for card in cards 
+for card in cards
 	card.states.switchInstant("folded")
-
