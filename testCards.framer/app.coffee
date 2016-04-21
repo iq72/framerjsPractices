@@ -1,6 +1,15 @@
-{dpr} = require 'DevicePixelRatio'
+dip = require 'DevicePixelRatio'
+dp = dip.DevicePixelRatio.calc
+console.log dip
+if Screen.width
+	if Screen.width < dp 360
+		console.log "device is small"
+	else if Screen.width < dp 720
+		console.log "device is middle"
+	else if Screen.width < dp 960
+		console.log "device is large"
+	else console.log "device is very large"
 
-console.log dpr 1
 ###########
 #background
 ###########
@@ -22,7 +31,7 @@ scroll = new ScrollComponent
 	height: Screen.height
 	scrollHorizontal: false
 	contentInset:
-		top: dpr 80
+		top: dp 80
 
 ###########
 #scroll TIPS
@@ -30,11 +39,11 @@ scroll = new ScrollComponent
 
 tips = new Layer
 	width: Screen.width
-	height: dpr 80
+	height: dp 80
 	y: Screen.height
 	color: "#aaa"
 	style:
-		font: "400 #{dpr 24}px -apple-system, Helvetica Neue, sans-serif"
+		font: "400 #{dp 24}px -apple-system, Helvetica Neue, sans-serif"
 		textAlign: "center"
 	html: """
 		<span>Pull up to fold the cards</span>
@@ -47,9 +56,9 @@ tips = new Layer
 ###########
 
 cards = []
-margin = dpr 18
-height = dpr 320
-threhold = dpr 80
+margin = dp 18
+height = dp 320
+threhold = dp 80
 amount = 5
 
 for i in [0...amount]
@@ -61,10 +70,10 @@ for i in [0...amount]
 		x: margin
 		y: i * (height+margin) + margin
 		backgroundColor: "White"
-		borderRadius: dpr 6
-		shadowSpread: dpr 0
+		borderRadius: dp 6
+		shadowSpread: dp 0
 		shadowColor: "rgba(0,0,0,0.15)"
-		shadowBlur: dpr 8
+		shadowBlur: dp 8
 	card.states.add
 		folded:
 			y: Align.center
@@ -79,7 +88,7 @@ for i in [0...amount]
 			name:"appendix"
 			superLayer: scroll.content
 			width: Screen.width
-			height: dpr 20
+			height: dp 20
 			x:Align.center
 			y: (i+1)*(height+margin)+ 2*margin
 			backgroundColor: "transparent"
@@ -87,21 +96,21 @@ for i in [0...amount]
 #cover
 cover = new Layer
 	width: Screen.width
-	height: dpr 80
+	height: dp 80
 	backgroundColor: themeColor
-	shadowSpread: dpr 3
+	shadowSpread: dp 3
 	shadowColor: "rgba(0,0,0,0.3)"
-	shadowY: dpr 3
-	shadowBlur: dpr 12
+	shadowY: dp 3
+	shadowBlur: dp 12
 	y:Align.top
 
 cover.states.add
 	folded:
-		width: cover.width - dpr 32
-		height: dpr 240
-		x: dpr 16
+		width: cover.width - dp 32
+		height: dp 240
+		x: dp 16
 		midY: Screen.height/2
-		borderRadius: dpr 12
+		borderRadius: dp 12
 cover.states.animationOptions = curve: curve
 
 scroll.states.add
@@ -160,6 +169,11 @@ scroll.on Events.ScrollEnd, ->
 		for card in cards
 			card.states.next()
 
+###
+# handle window resize
+###
+Events.wrap(window).addEventListener "resize" , (event) ->
+	console.log "resizing detected"
 
 
 ###########
