@@ -1,6 +1,14 @@
 dip = require 'DevicePixelRatio'
 dp = dip.DevicePixelRatio.calc
-console.log dip
+
+
+class pid extends dip
+	@foo: "bar"
+
+istn = new (pid)
+
+console.log istn + "\n" + pid.foo
+
 if Screen.width
 	if Screen.width < dp 360
 		console.log "device is small"

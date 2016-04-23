@@ -1,10 +1,27 @@
-var amount, appendCard, bg, card, cards, cover, curve, dip, dp, height, i, j, k, len, margin, mark1, mark2, maxY, ref, scroll, themeColor, threhold, tips;
+var amount, appendCard, bg, card, cards, cover, curve, dip, dp, height, i, istn, j, k, len, margin, mark1, mark2, maxY, pid, ref, scroll, themeColor, threhold, tips,
+  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
 dip = require('DevicePixelRatio');
 
 dp = dip.DevicePixelRatio.calc;
 
-console.log(dip);
+pid = (function(superClass) {
+  extend(pid, superClass);
+
+  function pid() {
+    return pid.__super__.constructor.apply(this, arguments);
+  }
+
+  pid.foo = "bar";
+
+  return pid;
+
+})(dip);
+
+istn = new pid;
+
+console.log(istn + "\n" + pid.foo);
 
 if (Screen.width) {
   if (Screen.width < dp(360)) {

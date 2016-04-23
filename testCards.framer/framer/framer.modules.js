@@ -60,7 +60,7 @@ exports.DevicePixelRatio = (function() {
 
 })();
 
-exports.dpr = exports.DevicePixelRatio.calc;
+exports.dp = exports.DevicePixelRatio.calc;
 
 
 },{}],"myModule":[function(require,module,exports){
