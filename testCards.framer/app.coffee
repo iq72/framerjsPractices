@@ -5,9 +5,9 @@ dp = dip.DevicePixelRatio.calc
 class pid extends dip
 	@foo: "bar"
 
-istn = new (pid)
+istn =
 
-console.log istn + "\n" + pid.foo
+console.log pid + "\n" + pid.foo
 
 if Screen.width
 	if Screen.width < dp 360

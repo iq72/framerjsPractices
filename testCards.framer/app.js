@@ -19,9 +19,7 @@ pid = (function(superClass) {
 
 })(dip);
 
-istn = new pid;
-
-console.log(istn + "\n" + pid.foo);
+istn = console.log(pid + "\n" + pid.foo);
 
 if (Screen.width) {
   if (Screen.width < dp(360)) {
