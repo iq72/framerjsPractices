@@ -90,6 +90,10 @@ for i in [0...amount]
 			height: 0
 			opacity: 0
 	card.states.animationOptions = curve: curve
+	card.onTap ->
+		return if scroll.isDragging
+		return if scroll.isMoving
+		console.log "card tapped"
 	cards.push card
 	if i==amount-1
 		appendCard= new Layer
