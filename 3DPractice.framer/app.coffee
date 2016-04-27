@@ -45,11 +45,12 @@ container.states.animationOptions = aniCurve
 ###
 # tap to toggle perspectives
 ###
-cards[15].onTap ->
+originRotationZ = originRotationX = null
+
+cards[15].on Events.Tap, toggle = ->
 	for card in cards
-		if card.isAnimating 
+		if card.isAnimating # do nothing is animating
 			return
-	print "noting is animating"
 	togglePerspective()
 
 togglePerspective = ->
@@ -57,18 +58,37 @@ togglePerspective = ->
 	container.states.next()
 	for card,index in cards
 		delayChangeState((cards.length-index)*delay, card)
+	if container.states.current is "perspective"
+		container.on Events.PanStart, handlePanStart
+		container.on Events.Pan, handlePan(event)
+		container.on Events.PanEnd, handlePanEnd
+	else 
+		container.off Events.PanStart, handlePanStart
+
+handlePanStart = ->
+	print "PanStart"
+	originRotationZ = container.rotationZ
+	originRotationX = container.rotationX
+	cards[15].off Events.Tap, toggle
+
+
+handlePan = (event) -> 
+	print "panning"
+	console.log event
+	container.rotationZ =originRotationZ - ((event.x - event.startX) / 4)
+	container.rotationX = originRotationX - ((event.y - event.startY)/4)
+
+handlePanEnd = ->
+	print "pan end"
+	cards[15].on Events.Tap,toggle
 
 delayChangeState = (time,layer) ->
 	Utils.delay time, ->
 		layer.states.next()
 
-originRotationZ = originRotationX = null
-container.on Events.PanStart, -> 
-	originRotationZ = container.rotationZ
-	originRotationX = container.rotationX
-container.on Events.Pan,(event) -> 
-	this.rotationZ =originRotationZ - ((event.x - event.startX) / 4)
-	this.rotationX = originRotationX - ((event.y - event.startY)/4)
+
+
+
 
 ###
 # center thyself when window is resized 
