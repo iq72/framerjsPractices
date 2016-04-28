@@ -47,7 +47,10 @@ container.states.animationOptions = aniCurve
 ###
 originRotationZ = originRotationX = null
 
-cards[15].on Events.Tap, toggle = ->
+cards[15].on Events.TapEnd, (event)-> toggle(event)
+
+toggle = (event) ->
+	console.log("tapped")
 	for card in cards
 		if card.isAnimating # do nothing is animating
 			return
@@ -56,35 +59,38 @@ cards[15].on Events.Tap, toggle = ->
 togglePerspective = ->
 	delay = if container.states.current isnt "perspective" then 0.05 else 0
 	container.states.next()
+	console.log "container states switched to #{container.states.current}"
 	for card,index in cards
 		delayChangeState((cards.length-index)*delay, card)
+
+delayChangeState = (time,layer) ->
+	Utils.delay time, ->
+		layer.states.next()	
+
+container.on Events.StateDidSwitch, ->
 	if container.states.current is "perspective"
-		container.on Events.PanStart, handlePanStart
-		container.on Events.Pan, handlePan(event)
-		container.on Events.PanEnd, handlePanEnd
+		container.on Events.PanStart, -> handlePanStart()
+		container.on Events.Pan, (event) -> handlePan(event)
+		container.on Events.PanEnd, -> 
+			Utils.delay 0.1, -> handlePanEnd() # recover tap event after PanEnd 
 	else 
-		container.off Events.PanStart, handlePanStart
+		container.off Events.PanStart
+		container.off Events.Pan
+		container.off Events.PanEnd,
 
 handlePanStart = ->
-	print "PanStart"
 	originRotationZ = container.rotationZ
 	originRotationX = container.rotationX
-	cards[15].off Events.Tap, toggle
-
+	cards[15].off Events.TapEnd #disable tap while panning
 
 handlePan = (event) -> 
-	print "panning"
-	console.log event
 	container.rotationZ =originRotationZ - ((event.x - event.startX) / 4)
 	container.rotationX = originRotationX - ((event.y - event.startY)/4)
 
 handlePanEnd = ->
-	print "pan end"
-	cards[15].on Events.Tap,toggle
+	cards[15].on Events.TapEnd, (event) -> toggle(event)
 
-delayChangeState = (time,layer) ->
-	Utils.delay time, ->
-		layer.states.next()
+
 
 
 
