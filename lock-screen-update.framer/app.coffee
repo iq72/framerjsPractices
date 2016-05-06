@@ -1,41 +1,33 @@
 # Background image
 bg = new Layer
-	width: 750, height: 1334, 
+	width: Screen.width, height: Screen.height
 	image: "images/bg.png"
 
-# Status bar
+lockScreen = new Layer
+	width: Screen.width, height: Screen.height
+	image: "images/numbers.png"
+
+home = new Layer
+	width: Screen.width, height: Screen.height
+	image: "images/home.png"
+
+page=new PageComponent
+	width: Screen.width, height: Screen.height
+
+page.scrollVertical = false
+
+page.addPage(lockScreen)
+page.addPage(home,"right")
+page.snapToPage(home)
+# disable over drag
+page.content.draggable.overdrag = false
+
 status = new Layer
-	width: Screen.width
+	width: 750
 	height: 40
 	image: "images/status.png"
 
-# Set-up PageComponent
-pager = new PageComponent
-	width: Screen.width
-	height: Screen.height
-	backgroundColor: null
-	scrollVertical: false
-
-# Layers for home and the keypad
-home = new Layer
-	width: Screen.width
-	height: Screen.height
-	image: "images/home.png"
-
-numbers = new Layer
-	width: Screen.width
-	height: Screen.height
-	image: "images/numbers.png"
-	
-# Add pages
-pager.addPage(numbers)
-pager.addPage(home)
-
-# Snap to the homescreen by default
-pager.snapToPage(home, false)
-
-# Modulate the blur, opacity and scale
-pager.content.on "change:x", ->
-	bg.blur = Utils.modulate(this.x, [-750, 0], [0, 20], true)
-	bg.opacity = Utils.modulate(this.x, [-750, 0], [1, 0.8], true)
-	bg.scale = Utils.modulate(this.x, [-750, 0], [1, 1.1], true)
+page.content.on "change:x", ->
+	bg.scale = Utils.modulate this.x, [0,-750], [1.2,1]
+	bg.blur = Utils.modulate this.x, [0,-750], [24,0]
+	bg.opacity = Utils.modulate this.x, [0,-750], [0.8,1]
