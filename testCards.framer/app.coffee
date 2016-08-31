@@ -1,4 +1,13 @@
 {dpr} = require 'DevicePixelRatio'
+{Material} = require 'myModule'
+
+testMaterial = new Material
+	x: 200, y: 20
+	elevation: 24
+	surfaceReaction: true
+	rippleColor: Material.Color.Pink[500]
+
+testMaterial.onTap ->
 
 console.log dpr 1
 ###########
