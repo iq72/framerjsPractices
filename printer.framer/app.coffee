@@ -24,21 +24,57 @@ caterScroll = ScrollComponent.wrap($.catergoryScroll)
 caterScroll.scrollVertical = false
 
 caterScroll.onScroll ->
-	scroll.scroll=false
-caterScroll.onScrollEnd ->
-	print "caterScroll"
-	scroll.scrollVertical = true
+	scroll.scrollVertical = !caterScroll.isDragging
 
-
+###
 #coverflow
-cover = PageComponent.wrap($.coverflow)
+###
+cover = PageComponent.wrap($.pageBeforeStart)
+cover.width=Screen.width
+cover.centerX()
 cover.scrollVertical = false
+cover.addPage($.pageStart)
 
+# 
+# cover.addPage($.card2)
+# cover.addPage($.card3)
+
+slides = [$.card0, $.card1, $.card2, $.card3,$.card4]
+
+cover.addPage card for card in slides
+
+cover.addPage($.loop)
+cover.addPage($.loop1)
+
+card.x += 24*index for card,index in cover.content.children
+
+cover.content.on Events.AnimationDidEnd, ->	
+	if cover.currentPage.name is "loop"
+		cover.snapToPage(slides[0], false)
+	if cover.currentPage.name is "pageStart"
+		cover.snapToPage(slides[4], false)
+	if cover.currentPage.name is "loop1"
+		cover.snapToPage(slides[1], false)
+	if cover.currentPage.name is "pageBeforeStart"
+		cover.snapToPage(slides[3], false)
+
+cover.snapToPage(slides[2],false)
+
+
+# stop scroll vetical while coverflow is paging
 cover.onScroll ->
-	scroll.scroll=false
-cover.onScrollEnd ->
-	print "cover"
-	scroll.scrollVertical = true
+	autoplay(cover, false)
+	scroll.scrollVertical = !cover.isDragging 
+	if !cover.isDragging then autoplay(cover, true)
+
+interval =null
+
+autoplay = (layer, flag)->
+	if flag then interval=Utils.interval 4, ->
+		layer.snapToNextPage("right", true)
+	else clearInterval interval
+
+autoplay(cover, true)
 
 
 #####

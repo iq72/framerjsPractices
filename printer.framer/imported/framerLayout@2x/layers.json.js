@@ -21,9 +21,9 @@ window.__imported__["framerLayout@2x/layers.json.js"] = [
 				"name": "homepage",
 				"maskFrame": null,
 				"layerFrame": {
-					"x": -220,
+					"x": -1696,
 					"y": 0,
-					"width": 1464,
+					"width": 4416,
 					"height": 1539
 				},
 				"visible": true,
@@ -398,9 +398,9 @@ window.__imported__["framerLayout@2x/layers.json.js"] = [
 						"name": "scrollable",
 						"maskFrame": null,
 						"layerFrame": {
-							"x": -220,
+							"x": -1696,
 							"y": 32,
-							"width": 1464,
+							"width": 4416,
 							"height": 1507
 						},
 						"visible": true,
@@ -409,14 +409,14 @@ window.__imported__["framerLayout@2x/layers.json.js"] = [
 						},
 						"children": [
 							{
-								"objectId": "2B1FCA5E-53A6-4541-A0D2-653382CAE244",
+								"objectId": "762A3161-D80C-47A7-BB1F-C76752A91907",
 								"kind": "group",
-								"name": "coverflow",
+								"name": "pageBeforeStart",
 								"maskFrame": null,
 								"layerFrame": {
-									"x": -220,
+									"x": -1696,
 									"y": 32,
-									"width": 1464,
+									"width": 480,
 									"height": 240
 								},
 								"visible": true,
@@ -424,11 +424,219 @@ window.__imported__["framerLayout@2x/layers.json.js"] = [
 									"opacity": 1
 								},
 								"image": {
-									"path": "images/Layer-coverflow-mkixrknb.png",
+									"path": "images/Layer-pageBeforeStart-nzyyqtmx.png",
+									"frame": {
+										"x": -1696,
+										"y": 32,
+										"width": 480,
+										"height": 240
+									}
+								},
+								"children": []
+							},
+							{
+								"objectId": "2C0A6B92-8D58-42E8-B204-9FAB29CE0482",
+								"kind": "group",
+								"name": "pageStart",
+								"maskFrame": null,
+								"layerFrame": {
+									"x": -1204,
+									"y": 32,
+									"width": 480,
+									"height": 240
+								},
+								"visible": true,
+								"metadata": {
+									"opacity": 1
+								},
+								"image": {
+									"path": "images/Layer-pageStart-mkmwqtzc.png",
+									"frame": {
+										"x": -1204,
+										"y": 32,
+										"width": 480,
+										"height": 240
+									}
+								},
+								"children": []
+							},
+							{
+								"objectId": "D9331A27-9BAF-4DD8-B209-0D27FA1649CE",
+								"kind": "group",
+								"name": "card0",
+								"maskFrame": null,
+								"layerFrame": {
+									"x": -712,
+									"y": 32,
+									"width": 480,
+									"height": 240
+								},
+								"visible": true,
+								"metadata": {
+									"opacity": 1
+								},
+								"image": {
+									"path": "images/Layer-card0-rdkzmzfb.png",
+									"frame": {
+										"x": -712,
+										"y": 32,
+										"width": 480,
+										"height": 240
+									}
+								},
+								"children": []
+							},
+							{
+								"objectId": "8E0948D0-8ACF-45B8-B27A-B599D0C5EF78",
+								"kind": "group",
+								"name": "card1",
+								"maskFrame": null,
+								"layerFrame": {
+									"x": -220,
+									"y": 32,
+									"width": 480,
+									"height": 240
+								},
+								"visible": true,
+								"metadata": {
+									"opacity": 1
+								},
+								"image": {
+									"path": "images/Layer-card1-oeuwotq4.png",
 									"frame": {
 										"x": -220,
 										"y": 32,
-										"width": 1464,
+										"width": 480,
+										"height": 240
+									}
+								},
+								"children": []
+							},
+							{
+								"objectId": "6E9C9E73-6370-441D-92F1-D48FD192DF16",
+								"kind": "group",
+								"name": "card2",
+								"maskFrame": null,
+								"layerFrame": {
+									"x": 272,
+									"y": 32,
+									"width": 480,
+									"height": 240
+								},
+								"visible": true,
+								"metadata": {
+									"opacity": 1
+								},
+								"image": {
+									"path": "images/Layer-card2-nku5qzlf.png",
+									"frame": {
+										"x": 272,
+										"y": 32,
+										"width": 480,
+										"height": 240
+									}
+								},
+								"children": []
+							},
+							{
+								"objectId": "B7962BBE-5427-47BC-A180-76804D43F05F",
+								"kind": "group",
+								"name": "card3",
+								"maskFrame": null,
+								"layerFrame": {
+									"x": 764,
+									"y": 32,
+									"width": 480,
+									"height": 240
+								},
+								"visible": true,
+								"metadata": {
+									"opacity": 1
+								},
+								"image": {
+									"path": "images/Layer-card3-qjc5njjc.png",
+									"frame": {
+										"x": 764,
+										"y": 32,
+										"width": 480,
+										"height": 240
+									}
+								},
+								"children": []
+							},
+							{
+								"objectId": "37381BDC-08E8-4508-8DA4-92A7D4C06493",
+								"kind": "group",
+								"name": "card4",
+								"maskFrame": null,
+								"layerFrame": {
+									"x": 1256,
+									"y": 32,
+									"width": 480,
+									"height": 240
+								},
+								"visible": true,
+								"metadata": {
+									"opacity": 1
+								},
+								"image": {
+									"path": "images/Layer-card4-mzczodfc.png",
+									"frame": {
+										"x": 1256,
+										"y": 32,
+										"width": 480,
+										"height": 240
+									}
+								},
+								"children": []
+							},
+							{
+								"objectId": "7E35F0A3-79E5-4985-8034-325F938A5DC6",
+								"kind": "group",
+								"name": "loop",
+								"maskFrame": null,
+								"layerFrame": {
+									"x": 1748,
+									"y": 32,
+									"width": 480,
+									"height": 240
+								},
+								"visible": true,
+								"metadata": {
+									"opacity": 1
+								},
+								"image": {
+									"path": "images/Layer-loop-n0uznuyw.png",
+									"frame": {
+										"x": 1748,
+										"y": 32,
+										"width": 480,
+										"height": 240
+									}
+								},
+								"children": []
+							},
+							{
+								"objectId": "CC7ABB8D-F113-4345-ADE9-21A0A959898A",
+								"kind": "group",
+								"name": "loop1",
+								"maskFrame": null,
+								"layerFrame": {
+									"x": 2240,
+									"y": 32,
+									"width": 480,
+									"height": 240
+								},
+								"visible": true,
+								"metadata": {
+									"opacity": 1
+								},
+								"image": {
+									"path": "images/Layer-loop1-q0m3qujc.png",
+									"frame": {
+										"x": 2240,
+										"y": 32,
+										"width": 480,
 										"height": 240
 									}
 								},
