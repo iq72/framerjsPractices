@@ -67,4 +67,3 @@ class Trigger extends Layer
 
 a = new Trigger
 a.trigger.center()
-
