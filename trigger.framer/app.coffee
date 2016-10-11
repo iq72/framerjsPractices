@@ -12,51 +12,59 @@ Framer.Info =
 themeColor = new Color('#23FF06')
 
 
-trigger = new Layer
-	width:100, height:60
-	backgroundColor: "transparent" 
+class Trigger extends Layer
+	constructor: ->
+		@trigger = new Layer
+			width:51, height:31
+			backgroundColor: "transparent" 
 
-triggerBg = new Layer
-	height: 40
-	width: 100
-	borderRadius: 100
-	backgroundColor: "rgba(108,108,108,0.5)"
-	superLayer: trigger
-	y: Align.center
-
-
-triggerBtn = new Layer
-	width: 60
-	borderRadius: 60
-	height: 60
-	parent: trigger
-	backgroundColor: "#fff"
-	shadowSpread: 0
-	shadowColor: "rgba(0,0,0,0.25)"
-	shadowY: 4
-	shadowBlur: 8
-	x: Align.left
-	y: Align.center
-
-triggerBtn.states.add
-	on:
-		x: Align.right
-
-triggerBg.states.add
-	on:
-		backgroundColor: themeColor
-
-triggerBtn.states.animationOptions = 
-	curve:"spring(200,30,0)"
-triggerBg.states.animationOptions =
-	time:1
-	curve:'ease'
+		triggerBg = new Layer
+			height: 31
+			width: 51
+			borderRadius: 100
+			backgroundColor: "rgba(255,255,255,1)"
+			superLayer: @trigger
+			y: Align.center
+			borderWidth: 2
+			borderColor: "rgba(0,0,0,0.1)"
 
 
-trigger.onTap ->
-	layer.states.next() for layer in trigger.children 
+		triggerBtn = new Layer
+			width: 28	
+			borderRadius: 28
+			height: 28
+			parent: @trigger
+			backgroundColor: "#fff"
+			shadowSpread: 0
+			shadowColor: "rgba(0,0,0,0.25)"
+			shadowY: 3
+			shadowBlur: 3
+			x: Align.left
+			y: Align.center
+			borderWidth: 1
+			borderColor: "rgba(0,0,0,0.1)"
+		
+		triggerBtn.states.add
+			ON:
+				x: Align.right
+		
+		triggerBg.states.add
+			ON:
+				backgroundColor: themeColor
+				borderColor:"rgba(0,0,0,0)"
+		
+		triggerBtn.states.animationOptions = 
+			curve:"spring(200,30,0)"
+		triggerBg.states.animationOptions =
+			time:1
+			curve:'ease'
+		
+		
+		@trigger.onTap =>
+			if !triggerBg.isAnimating then layer.states.next() for layer in @trigger.children 
 
-backgroundA = new BackgroundLayer
-	backgroundColor: "rgba(243,243,244,1)"
 
-trigger.center()
+
+a = new Trigger
+a.trigger.center()
+
