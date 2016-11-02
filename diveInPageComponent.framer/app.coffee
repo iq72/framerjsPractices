@@ -57,5 +57,11 @@ for a in [0...5]
 # when pageSuper is moving vertically, disable pageSub
 pageSuper.content.on "change:y", ->
 	pageSub.content.draggable=false
-pageSuper.content.onAnimationDidEnd ->
+pageSuper.content.onAnimationStop ->
 	pageSub.content.draggable=true
+
+
+# also disable pageSuper when pageSub is not at start point
+pageSub.on "change:currentPage",(currentPage)->
+	if currentPage is pageSub.content.children[0] then pageSuper.content.draggable = true
+	else pageSuper.content.draggable = false 
